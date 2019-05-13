@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Lottie demo</string>
+	<string>Lottie master</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -22,7 +22,6 @@
 				<string>com.lottie.demo</string>
 			</array>
 		</dict>
-		<dict/>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -84,5 +83,10 @@
 			</dict>
 		</dict>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
