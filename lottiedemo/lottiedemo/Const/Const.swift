@@ -2,12 +2,12 @@
 import Foundation
 
 struct APPCONFIG {
-    static let TITLE = "magic mobile"
+    static let TITLE = "lottie master"
 }
 
 /*イメージカラー*/
 struct COLOR{
     static let BASE = "#ffffff"  //白
-    static let FONT = "#000000"  //黒
-    static let ACCENT =  "#FA5858" //赤
+    static let FONT = "#006271"  //黒
+    static let ACCENT =  "#59CDC1" //緑
 }
