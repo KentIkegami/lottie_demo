@@ -1,23 +1,13 @@
 
 import Foundation
 
-struct GetJson:Codable {
-    let Status: String
-    let ShopName: String?
-    
+struct GetJson {
     //レスポンス -> Error or Login
-    static func from(response: Response) -> Either<TransformError, GetJson> {
+    static func from(response: Response) -> Either<TransformError, String> {
         switch response.statusCode {
         case .ok:
-            do {
-                let jsonDecoder = JSONDecoder()
-                print(String(data: response.payload, encoding: .utf8)!)
-                let login = try jsonDecoder.decode(GetJson.self, from: response.payload)
-                return .right(login)
-            }
-            catch {
-                return .left(.malformedData(debugInfo: "\(error)"))
-            }
+            let json = String(data: response.payload, encoding: .utf8)!
+            return .right(json)
         default:
             return .left(.unexpectedStatusCode(
                 debugInfo: "\(response.statusCode)")
@@ -29,10 +19,11 @@ struct GetJson:Codable {
     // - 変換エラーの場合     → .left(.right(TransformError))
     // - 正常に取得できた場合 → .right(response)
     static func fetch(
-        _ block: @escaping (Either<Either<ConnectionError, TransformError>, GetJson>) -> Void
+        url: String,
+        _ block: @escaping (Either<Either<ConnectionError, TransformError>, String>) -> Void
         ) {
 
-        let urlString = "https://logococo.club/json/001.json"
+        let urlString = url
         print(urlString)
         
         guard let url = URL(string: urlString) else {
