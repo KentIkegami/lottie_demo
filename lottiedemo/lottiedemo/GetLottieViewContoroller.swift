@@ -14,6 +14,13 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.hex(COLOR.BASE, alpha: 1.0)
         
+        //タイトル
+        title = "Get LottieFile"
+        //キャンセルボタン追加
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: self, action: #selector(self.onTapCancel(sender:)))
+        cancelButton.tintColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
+        self.navigationItem.setRightBarButton(cancelButton, animated: true)
+        
         /*-------------------------------------------------------------------------
          フォーム
          -------------------------------------------------------------------------*/
@@ -118,6 +125,11 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
         self.view.addSubview(activeIndicatorView)
     }
     
+    //戻る
+    @objc internal func onTapCancel(sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @objc func onTap (sender:UIButton){
         UserDefaults.standard.set(lottieURLForm.text, forKey: "url")
         self.getLottie()
@@ -151,8 +163,11 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
             let filePath = dir.appendingPathComponent( fileName(_str: url)+".json")
             let text: String = json
             do {
-                print("filePath: \(filePath)") // <=ファイルが出力されるパスをデッバグエリアで確認してみてください
+                print("filePath: \(filePath)") 
                 try text.write(to: filePath, atomically: true, encoding: .utf8)
+                UserDefaults.standard.set(fileName(_str: url)+".json", forKey: "filename")
+                self.dismiss(animated: true, completion: nil)
+                
             } catch {
                 print("error")
             }

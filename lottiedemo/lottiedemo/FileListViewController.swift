@@ -11,6 +11,14 @@ class FileListViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.hex(COLOR.BASE, alpha: 1.0)
         
+        //タイトル
+        title = "LottieFile List"
+        //キャンセルボタン追加
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: self, action: #selector(self.onTapCancel(sender:)))
+        cancelButton.tintColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
+        self.navigationItem.setRightBarButton(cancelButton, animated: true)
+        
+        //データ取得
         self.lottieFiles = getLottieFiles()
         // TableView
         _tableView = UITableView(frame: CGRect(x: 0,
@@ -34,6 +42,10 @@ class FileListViewController: UIViewController, UITableViewDelegate, UITableView
         self._tableView.reloadData()
     }
     
+    //戻る
+    @objc internal func onTapCancel(sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
+    }
     
     //ドキュメントファイル取得
     private func getLottieFiles()->[LottieFile]{
@@ -78,6 +90,9 @@ class FileListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     /*Cellが選択された際に呼び出される*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        UserDefaults.standard.set(lottieFiles[indexPath.row].filename, forKey: "filename")
+        self.dismiss(animated: true, completion: nil)
         
         //cellの選択解除
         if let indexPathForSelectedRow = _tableView.indexPathForSelectedRow {
