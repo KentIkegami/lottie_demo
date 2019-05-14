@@ -137,14 +137,51 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
                     print(errorStr)
                 }
             case let .right(response):
-                self.saveJson(json: response)
+                DispatchQueue.main.async {
+                self.saveJson(json: response, url: self.lottieURLForm.text!)
+                }
                 print(response)
             }
         }
     }
     
-    private func saveJson(json:String){
+    private func saveJson(json:String, url: String){
         
+        if let dir = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first {
+            let filePath = dir.appendingPathComponent( fileName(_str: url)+".json")
+            let text: String = json
+            do {
+                print("filePath: \(filePath)") // <=ファイルが出力されるパスをデッバグエリアで確認してみてください
+                try text.write(to: filePath, atomically: true, encoding: .utf8)
+            } catch {
+                print("error")
+            }
+        }
+    }
+    
+    private func fileName(_str:String)->String{
+        var str = _str
+        if let range = str.range(of: "http://") {
+            str = str.replacingCharacters(in:range, with: "")
+        }
+        
+        if let range = str.range(of: "https://") {
+            str = str.replacingCharacters(in:range, with: "")
+        }
+        
+        if let range = str.range(of: ".json") {
+            str = str.replacingCharacters(in:range, with: "")
+        }
+        
+        while true {
+            if let range = str.range(of: "/") {
+                str = str.replacingCharacters(in:range, with: "_")
+            } else {
+                break
+            }
+        }
+        
+        return str
     }
     
     /*-------------------------------------------------------------------------

@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let initViewController: UIViewController = PlayViewController()
+        let initViewController: UIViewController = GetLottieViewContoroller()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = initViewController
         self.window?.makeKeyAndVisible()
@@ -17,10 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("url: ", url)
-        
-        // ファイルを扱う処理
-        // ...
+        print(url)
+
+        let toDir = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first
+        print(toDir!)
+        do {
+            try? FileManager.default.removeItem(at: toDir!.appendingPathComponent( url.lastPathComponent))
+            try FileManager.default.moveItem(at: url, to: toDir!.appendingPathComponent( url.lastPathComponent))
+        } catch {
+            print("copy error")
+            return false
+        }
         
         return true
     }
