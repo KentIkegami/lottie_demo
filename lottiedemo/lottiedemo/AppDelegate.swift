@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let initViewController: UIViewController = GetLottieViewContoroller()
+        let initViewController: UIViewController = PlayViewController()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = initViewController
         self.window?.makeKeyAndVisible()
