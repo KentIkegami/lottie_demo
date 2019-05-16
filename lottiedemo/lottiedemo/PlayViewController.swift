@@ -43,7 +43,7 @@ class PlayViewController: UIViewController {
         animationView = AnimationView()
         //animationView.backgroundColor = UIColor.red
         animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.width)
-        animationView.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: view.bounds.width*1/2 + 80)
+        animationView.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: view.bounds.width*1/2 + 100)
         animationView.loopMode = .loop
         animationView.contentMode = .scaleAspectFit
         animationView.animationSpeed = 1
@@ -51,7 +51,7 @@ class PlayViewController: UIViewController {
         
         //スピード表示
         speedLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 30))
-        speedLabel.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 80)
+        speedLabel.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 100)
         speedLabel.text = "x1.0"
         speedLabel.font = UIFont(name: "Helvetica", size: 20)
         speedLabel.textColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
@@ -63,7 +63,7 @@ class PlayViewController: UIViewController {
                                                   y: 0,
                                                   width: UIScreen.main.bounds.size.width*0.95,
                                                   height: 35))
-        backChangeButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 80)
+        backChangeButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 100)
         backChangeButton.isUserInteractionEnabled = true
         backChangeButton.addTarget(self,
                               action: #selector(onTapbackChangeButton(sender:)),
@@ -80,7 +80,7 @@ class PlayViewController: UIViewController {
         //スライダー
         slider1 = UISlider(frame: CGRect(x: 0, y: 0, width: view.bounds.width * 8/10, height: 50))
         slider1.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
-                                        y: animationView.frame.height + 80 + 25)
+                                        y: animationView.frame.height + 100 + 25)
         slider1.thumbTintColor = UIColor.hex(COLOR.ACCENT, alpha: 1.0)
         slider1.tintColor = UIColor.hex(COLOR.ACCENT, alpha: 1.0)
         slider1.addTarget(self, action: #selector(sliderDidChangeValue1(_:)), for: .valueChanged)
@@ -89,7 +89,7 @@ class PlayViewController: UIViewController {
         //スライダー
         slider2 = UISlider(frame: CGRect(x: 0, y: 0, width: view.bounds.width * 8/10, height: 50))
         slider2.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
-                                         y: animationView.frame.height + 80 + 75)
+                                         y: animationView.frame.height + 100 + 75)
         slider2.thumbTintColor = UIColor.hex(COLOR.ACCENT, alpha: 1.0)
         slider2.tintColor = UIColor.hex(COLOR.ACCENT, alpha: 1.0)
         slider2.minimumValue = 0.1
@@ -105,7 +105,7 @@ class PlayViewController: UIViewController {
                                                   width: UIScreen.main.bounds.size.width*6/10,
                                                   height: 35))
         startButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
-                                             y: animationView.frame.height + 80 + 75 + 40)
+                                             y: animationView.frame.height + 100 + 75 + 40)
         
         startButton.isUserInteractionEnabled = true
         startButton.addTarget(self,
@@ -126,7 +126,7 @@ class PlayViewController: UIViewController {
         //プロパティ表示
         propertyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 60))
         propertyLabel.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
-                                               y: animationView.frame.height + 80 + 75 + 40 + 60)
+                                               y: animationView.frame.height + 100 + 75 + 40 + 60)
         propertyLabel.backgroundColor = .blue
         propertyLabel.text = "x1.0"
         propertyLabel.font = UIFont(name: "Helvetica", size: 12)
@@ -228,10 +228,9 @@ class PlayViewController: UIViewController {
             let nav: UINavigationController = UINavigationController(rootViewController: next)
             self.present(nav, animated: true, completion: nil)
         }else if sender.tag == 2{
-            let next = InfoViewController()
-            next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-            let nav: UINavigationController = UINavigationController(rootViewController: next)
-            self.present(nav, animated: true, completion: nil)
+            let infoView = InfoView(frame: self.view.frame)
+            navigationController?.view.addSubview(infoView)
+            
         }
     }
     
@@ -249,6 +248,8 @@ class PlayViewController: UIViewController {
     /*-------------------------------------------------------------------------
      Other
      -------------------------------------------------------------------------*/
+    
+    
     
     private func createImageFromUIColor(color: UIColor) -> UIImage{
         // 1x1のbitmapを作成
