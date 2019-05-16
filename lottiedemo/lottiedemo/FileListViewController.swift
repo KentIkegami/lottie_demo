@@ -101,17 +101,60 @@ class FileListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    /*スワイプ削除アクション*/
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            //
+//    /*スワイプ削除アクション*/
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            //
+//            let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//            try? FileManager.default.removeItem(at: documentDirectoryURL.appendingPathComponent( lottieFiles[indexPath.row].filename ))
+//            self.lottieFiles.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .left)
+//        }
+//    }
+    
+    /*-------------------------------------------------------------------------
+     tabelView スワイプメソッド
+     -------------------------------------------------------------------------*/
+    // trueを返すことでCellのアクションを許可しています
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action1 =  UIContextualAction(style: .normal, title: "Share", handler: { (action:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            //共有処理
             let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            try? FileManager.default.removeItem(at: documentDirectoryURL.appendingPathComponent( lottieFiles[indexPath.row].filename ))
-            self.lottieFiles.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .left)
-        }
+            let url = documentDirectoryURL.appendingPathComponent( self.lottieFiles[indexPath.row].filename )
+            let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            self.present(activity, animated: true, completion: nil)
+            
+            success(true)
+        })
+        action1.backgroundColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
+        
+        let confrigation = UISwipeActionsConfiguration(actions: [action1])
+        confrigation.performsFirstActionWithFullSwipe = false
+        return confrigation
     }
     
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action1 =  UIContextualAction(style: .destructive, title: "Delete", handler: { (action:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            //削除処理
+            let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            try? FileManager.default.removeItem(at: documentDirectoryURL.appendingPathComponent( self.lottieFiles[indexPath.row].filename ))
+            self.lottieFiles.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            success(true)
+        })
+        action1.backgroundColor = UIColor.red
+        let confrigation = UISwipeActionsConfiguration(actions: [action1])
+        return confrigation
+    }
+
 
 }
 
