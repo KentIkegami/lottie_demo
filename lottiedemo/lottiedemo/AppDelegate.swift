@@ -9,6 +9,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var initViewController: PlayViewController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        //初回起動判定
+        if UserDefaults.standard.object(forKey: "firstLaunch") == nil {
+            firstLaunch()
+        }
         initViewController = PlayViewController()
         let nav: UINavigationController = UINavigationController(rootViewController: initViewController)
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -21,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(url)
 
         let toDir = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first
-        print(toDir!)
         do {
             try? FileManager.default.removeItem(at: toDir!.appendingPathComponent( url.lastPathComponent))
             try FileManager.default.moveItem(at: url, to: toDir!.appendingPathComponent( url.lastPathComponent))
@@ -33,10 +36,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("copy error")
             return false
         }
-        
         return true
     }
     
+    //初回起動処理
+    func firstLaunch(){
+        
+        let demos = ["demo1","demo2","demo3"]
+        for demo in demos{
+            let url = URL(fileURLWithPath: Bundle.main.path( forResource: demo, ofType: "json" )! )
+            let toDir = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first
+            do {
+                try FileManager.default.copyItem(at: url, to: toDir!.appendingPathComponent( url.lastPathComponent))
+            } catch {
+                print("copy error")
+            }
+        }
+        
+        UserDefaults.standard.set("demo1.json", forKey: "filename")
+        UserDefaults.standard.set(1, forKey: "firstLaunch")
+    }
    
     
     func applicationWillResignActive(_ application: UIApplication) {
