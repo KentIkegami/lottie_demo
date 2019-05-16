@@ -5,11 +5,13 @@ import Lottie
 
 class PlayViewController: UIViewController {
     
-    private var animationView:AnimationView!
-    private var speedLabel:UILabel!
+    public var animationView: AnimationView!
+    private var speedLabel: UILabel!
+    private var backChangeButton: UIButton!
     private var slider1: UISlider!
     private var slider2: UISlider!
     private var startButton: UIButton!
+    private var propertyLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,7 @@ class PlayViewController: UIViewController {
         
         //アニメ
         animationView = AnimationView()
-        animationView.backgroundColor = UIColor.red
+        //animationView.backgroundColor = UIColor.red
         animationView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.width)
         animationView.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: view.bounds.width*1/2 + 80)
         animationView.loopMode = .loop
@@ -40,12 +42,32 @@ class PlayViewController: UIViewController {
         view.addSubview(animationView)
         
         //スピード表示
-        speedLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 30))
+        speedLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 30))
         speedLabel.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 80)
         speedLabel.text = "x1.0"
+        speedLabel.font = UIFont(name: "Helvetica", size: 20)
         speedLabel.textColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
         speedLabel.textAlignment = .left
         view.addSubview(speedLabel)
+        
+        //背景ボタン
+        backChangeButton = UIButton.init(frame: CGRect(x: 0,
+                                                  y: 0,
+                                                  width: UIScreen.main.bounds.size.width*0.95,
+                                                  height: 35))
+        backChangeButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 80)
+        backChangeButton.isUserInteractionEnabled = true
+        backChangeButton.addTarget(self,
+                              action: #selector(onTapbackChangeButton(sender:)),
+                              for: .touchUpInside)
+        backChangeButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)//アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
+        backChangeButton.isExclusiveTouch = true//複数選択制御
+        backChangeButton.showsTouchWhenHighlighted = true
+        backChangeButton.setTitle(NSLocalizedString("Black", comment: ""), for: .normal)
+        backChangeButton.contentHorizontalAlignment = .right
+        backChangeButton.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
+        backChangeButton.setTitleColor(UIColor.hex(COLOR.ACCENT, alpha: 1.0), for: .normal)
+        self.view.addSubview(backChangeButton)
         
         //スライダー
         slider1 = UISlider(frame: CGRect(x: 0, y: 0, width: view.bounds.width * 8/10, height: 50))
@@ -68,40 +90,45 @@ class PlayViewController: UIViewController {
         
         slider2.addTarget(self, action: #selector(sliderDidChangeValue2(_:)), for: .valueChanged)
         view.addSubview(slider2)
-        
-        /*-------------------------------------------------------------------------
-         スタートボタン
-         -------------------------------------------------------------------------*/
-        //サイズ
+
+        //スタートボタン
         startButton = UIButton.init(frame: CGRect(x: 0,
                                                   y: 0,
                                                   width: UIScreen.main.bounds.size.width*6/10,
                                                   height: 35))
         startButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
-                                             y: animationView.frame.height + 80 + 75 + 35)
+                                             y: animationView.frame.height + 80 + 75 + 40)
         
         startButton.isUserInteractionEnabled = true
         startButton.addTarget(self,
                               action: #selector(onTapStartButton(sender:)),
                               for: .touchUpInside)
-        //アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
-        startButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)
-        //複数選択制御
-        startButton.isExclusiveTouch = true
-        //背景
+        startButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)//アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
+        startButton.isExclusiveTouch = true//複数選択制御
         startButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 1.0)), for: .normal)
         startButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 1.0)), for: .highlighted)
         startButton.layer.masksToBounds = true
         startButton.layer.cornerRadius = 5.0
         startButton.showsTouchWhenHighlighted = true
-        //タイトル関係
         startButton.setTitle(NSLocalizedString("Pouse", comment: ""), for: .normal)
         startButton.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
         startButton.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .normal)
-        //startButton.setTitle(NSLocalizedString("Login", comment: ""), for: .highlighted)
-        //startButton.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .highlighted)
-        
         self.view.addSubview(startButton)
+        
+        //プロパティ表示
+        propertyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 60))
+        propertyLabel.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
+                                               y: animationView.frame.height + 80 + 75 + 40 + 60)
+        propertyLabel.backgroundColor = .blue
+        propertyLabel.text = "x1.0"
+        propertyLabel.font = UIFont(name: "Helvetica", size: 12)
+        propertyLabel.textColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
+        propertyLabel.textAlignment = .left
+        propertyLabel.numberOfLines = 0
+        propertyLabel.backgroundColor = UIColor.hex(COLOR.ACCENT , alpha: 0.2)
+
+        view.addSubview(propertyLabel)
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -126,6 +153,18 @@ class PlayViewController: UIViewController {
     /*-------------------------------------------------------------------------
      アクション
      -------------------------------------------------------------------------*/
+    
+    //ボタン
+    @objc internal func onTapbackChangeButton(sender: UIButton){
+        if backChangeButton.titleLabel?.text == "White" {
+            self.view.backgroundColor = .white
+            backChangeButton.setTitle("Black", for: .normal)
+        }else{
+            self.view.backgroundColor = .black
+            backChangeButton.setTitle("White", for: .normal)
+        }
+    }
+    
     @objc func timerUpdate() {
         slider1.setValue(Float(animationView.realtimeAnimationProgress), animated: true)
     }
@@ -153,6 +192,19 @@ class PlayViewController: UIViewController {
         //アニメ設定
         animationView.animation = Animation.filepath(path.path)
         animationView.play()
+        
+        //アニメーションプロパティ設定
+        var text = ""
+        
+        if animationView.animation != nil {
+            text += "Framerate: \( round((animationView.animation!.framerate ) * 100 )*0.01 )"
+            text += "\n"
+            text += "Duration: \(round((animationView.animation!.duration ) * 10 )*0.1) s"
+            text += "\n"
+            text += "MasterSize: \(animationView.animation!.size ) "
+        }
+        
+        propertyLabel.text = text
     }
     
     //画面遷移アクション
