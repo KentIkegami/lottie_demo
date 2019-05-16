@@ -84,6 +84,7 @@ class FileListViewController: UIViewController, UITableViewDelegate, UITableView
         }
         cell?.accessoryType = .disclosureIndicator //右側の >
         cell?.textLabel!.text = lottieFiles[indexPath.row].filename
+        cell?.textLabel?.numberOfLines = 0
         //cell?.detailTextLabel?.text = "POSコード: " + historys[indexPath.row].ean13code
         
         return cell!
