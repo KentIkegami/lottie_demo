@@ -7,6 +7,7 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
     
     private var lottieURLForm:UITextField!
     private var getButton:UIButton!
+    private var linkButton:UIButton!
     private var textLabel:UILabel!
     private var activeIndicatorView:NVActivityIndicatorView!
     
@@ -114,6 +115,39 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
         textLabel.textColor = UIColor.hex(COLOR.FONT, alpha: 1.0)
         self.view.addSubview(textLabel)
         
+        /*-------------------------------------------------------------------------
+         linkボタン
+         -------------------------------------------------------------------------*/
+        //サイズ
+        linkButton = UIButton.init(frame: CGRect(x: 0,
+                                                y: 0,
+                                                width: UIScreen.main.bounds.size.width*4/10,
+                                                height: 30))
+        linkButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
+                                           y: UIScreen.main.bounds.size.height*7/10)
+        
+        linkButton.isUserInteractionEnabled = true
+        linkButton.addTarget(self,
+                            action: #selector(onTapLink(sender:)),
+                            for: .touchUpInside)
+        //アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
+        linkButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)
+        //複数選択制御
+        linkButton.isExclusiveTouch = true
+        //背景
+        linkButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 0.3)), for: .normal)
+        linkButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 0.1)), for: .highlighted)
+        linkButton.layer.masksToBounds = true
+        linkButton.layer.cornerRadius = 3.0
+        linkButton.showsTouchWhenHighlighted = true
+        //タイトル関係
+        linkButton.setTitle(NSLocalizedString("LottieFiles.com", comment: ""), for: .normal)
+        linkButton.titleLabel?.font = UIFont(name: "Helvetica", size: 17)
+        linkButton.setTitleColor(UIColor.hex(COLOR.ACCENT, alpha: 1.0), for: .normal)
+        linkButton.setTitle(NSLocalizedString("LottieFiles.com", comment: ""), for: .highlighted)
+        linkButton.setTitleColor(UIColor.hex(COLOR.ACCENT, alpha: 0.8), for: .highlighted)
+        
+        self.view.addSubview(linkButton)
         
         //インジケータービュー
         self.activeIndicatorView = NVActivityIndicatorView(frame: self.view.frame,
@@ -134,6 +168,15 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
         UserDefaults.standard.set(lottieURLForm.text, forKey: "url")
         self.getLottie()
     }
+    
+    @objc func onTapLink (sender:UIButton){
+        let url = URL(string:"https://lottiefiles.com/recent")
+        if( UIApplication.shared.canOpenURL(url!) ) {
+            UIApplication.shared.open(url!)
+        }
+        
+    }
+    
     
     private func getLottie(){
         self.activeIndicatorView.startAnimating()
