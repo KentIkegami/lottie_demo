@@ -25,6 +25,14 @@ class PlayViewController: UIViewController {
         addButton.tintColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
         self.navigationItem.setRightBarButton(addButton, animated: true)
         
+        //情報ボタン追加
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.tag = 2
+        infoButton.tintColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
+        infoButton.addTarget(self, action: #selector(self.onTap(sender:)), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        self.navigationItem.setRightBarButtonItems([addButton,infoBarButtonItem], animated: true)
+
         //リストボタン追加
         let listButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.organize, target: self, action: #selector(self.onTap(sender:)))
         listButton.tag = 1
@@ -214,8 +222,13 @@ class PlayViewController: UIViewController {
             next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
             let nav: UINavigationController = UINavigationController(rootViewController: next)
             self.present(nav, animated: true, completion: nil)
-        }else{
+        }else if sender.tag == 1{
             let next = FileListViewController()
+            next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+            let nav: UINavigationController = UINavigationController(rootViewController: next)
+            self.present(nav, animated: true, completion: nil)
+        }else if sender.tag == 2{
+            let next = InfoViewController()
             next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
             let nav: UINavigationController = UINavigationController(rootViewController: next)
             self.present(nav, animated: true, completion: nil)
