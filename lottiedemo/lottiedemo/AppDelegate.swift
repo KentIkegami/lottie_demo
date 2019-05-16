@@ -6,10 +6,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var initViewController: PlayViewController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let initViewController: UIViewController = PlayViewController()
+        initViewController = PlayViewController()
         let nav: UINavigationController = UINavigationController(rootViewController: initViewController)
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = nav
@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try? FileManager.default.removeItem(at: toDir!.appendingPathComponent( url.lastPathComponent))
             try FileManager.default.moveItem(at: url, to: toDir!.appendingPathComponent( url.lastPathComponent))
+            UserDefaults.standard.set(url.lastPathComponent, forKey: "filename")
+            if initViewController.animationView != nil {
+                initViewController.viewWillAppear(true)
+            }
         } catch {
             print("copy error")
             return false
