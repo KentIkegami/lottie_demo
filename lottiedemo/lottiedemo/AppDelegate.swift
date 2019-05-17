@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //初回起動処理
     func firstLaunch(){
         
-        let demos = ["demo1","demo2","demo3"]
+        let demos = ["demo1"]
         for demo in demos{
             let url = URL(fileURLWithPath: Bundle.main.path( forResource: demo, ofType: "json" )! )
             let toDir = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first

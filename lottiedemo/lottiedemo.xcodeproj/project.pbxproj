@@ -15,10 +15,8 @@
 		BD0F5D1D2286758400440F18 /* WebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0F5D1C2286758400440F18 /* WebAPI.swift */; };
 		BD0F5D1F228675D600440F18 /* GetJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0F5D1E228675D600440F18 /* GetJson.swift */; };
 		BD659CF8228AA393006FEB8F /* LottieFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD659CF7228AA393006FEB8F /* LottieFile.swift */; };
-		BD9AF81B228D03DF005EC346 /* demo2.json in Resources */ = {isa = PBXBuildFile; fileRef = BD9AF818228D03DF005EC346 /* demo2.json */; };
-		BD9AF81C228D03DF005EC346 /* demo1.json in Resources */ = {isa = PBXBuildFile; fileRef = BD9AF819228D03DF005EC346 /* demo1.json */; };
-		BD9AF81D228D03DF005EC346 /* demo3.json in Resources */ = {isa = PBXBuildFile; fileRef = BD9AF81A228D03DF005EC346 /* demo3.json */; };
 		BD9AF823228D220E005EC346 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AF822228D220E005EC346 /* InfoView.swift */; };
+		BD9AF826228E33C8005EC346 /* demo1.json in Resources */ = {isa = PBXBuildFile; fileRef = BD9AF825228E33C8005EC346 /* demo1.json */; };
 		BDB7890D2286729500A48793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB7890C2286729500A48793 /* AppDelegate.swift */; };
 		BDB7890F2286729500A48793 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB7890E2286729500A48793 /* PlayViewController.swift */; };
 		BDB789142286729600A48793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDB789132286729600A48793 /* Assets.xcassets */; };
@@ -36,10 +34,8 @@
 		BD0F5D1C2286758400440F18 /* WebAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPI.swift; sourceTree = "<group>"; };
 		BD0F5D1E228675D600440F18 /* GetJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJson.swift; sourceTree = "<group>"; };
 		BD659CF7228AA393006FEB8F /* LottieFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieFile.swift; sourceTree = "<group>"; };
-		BD9AF818228D03DF005EC346 /* demo2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo2.json; sourceTree = "<group>"; };
-		BD9AF819228D03DF005EC346 /* demo1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo1.json; sourceTree = "<group>"; };
-		BD9AF81A228D03DF005EC346 /* demo3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo3.json; sourceTree = "<group>"; };
 		BD9AF822228D220E005EC346 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		BD9AF825228E33C8005EC346 /* demo1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo1.json; sourceTree = "<group>"; };
 		BDB789092286729500A48793 /* lottiedemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lottiedemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDB7890C2286729500A48793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDB7890E2286729500A48793 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
@@ -90,9 +86,7 @@
 		BD9AF817228D03CF005EC346 /* demo */ = {
 			isa = PBXGroup;
 			children = (
-				BD9AF819228D03DF005EC346 /* demo1.json */,
-				BD9AF818228D03DF005EC346 /* demo2.json */,
-				BD9AF81A228D03DF005EC346 /* demo3.json */,
+				BD9AF825228E33C8005EC346 /* demo1.json */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -194,10 +188,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD9AF81C228D03DF005EC346 /* demo1.json in Resources */,
+				BD9AF826228E33C8005EC346 /* demo1.json in Resources */,
 				BDB789142286729600A48793 /* Assets.xcassets in Resources */,
-				BD9AF81D228D03DF005EC346 /* demo3.json in Resources */,
-				BD9AF81B228D03DF005EC346 /* demo2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

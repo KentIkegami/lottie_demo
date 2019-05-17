@@ -147,7 +147,7 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
         linkButton.setTitle(NSLocalizedString("LottieFiles.com", comment: ""), for: .highlighted)
         linkButton.setTitleColor(UIColor.hex(COLOR.ACCENT, alpha: 0.8), for: .highlighted)
         
-        self.view.addSubview(linkButton)
+        //self.view.addSubview(linkButton)
         
         //インジケータービュー
         self.activeIndicatorView = NVActivityIndicatorView(frame: self.view.frame,
