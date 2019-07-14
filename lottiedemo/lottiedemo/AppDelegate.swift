@@ -13,12 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaults.standard.object(forKey: "firstLaunch") == nil {
             firstLaunch()
         }
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        popMain()
+        return true
+    }
+    
+    func popMain(){
         initViewController = PlayViewController()
         let nav: UINavigationController = UINavigationController(rootViewController: initViewController)
-        self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
-        return true
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

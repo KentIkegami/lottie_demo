@@ -14,6 +14,7 @@
 		BD0F5D1A2286752B00440F18 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0F5D192286752B00440F18 /* Either.swift */; };
 		BD0F5D1D2286758400440F18 /* WebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0F5D1C2286758400440F18 /* WebAPI.swift */; };
 		BD0F5D1F228675D600440F18 /* GetJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0F5D1E228675D600440F18 /* GetJson.swift */; };
+		BD50EB8522D86C4E006337AB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD50EB8422D86C4E006337AB /* ARViewController.swift */; };
 		BD659CF8228AA393006FEB8F /* LottieFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD659CF7228AA393006FEB8F /* LottieFile.swift */; };
 		BD9AF823228D220E005EC346 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AF822228D220E005EC346 /* InfoView.swift */; };
 		BD9AF826228E33C8005EC346 /* demo1.json in Resources */ = {isa = PBXBuildFile; fileRef = BD9AF825228E33C8005EC346 /* demo1.json */; };
@@ -33,6 +34,7 @@
 		BD0F5D192286752B00440F18 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		BD0F5D1C2286758400440F18 /* WebAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPI.swift; sourceTree = "<group>"; };
 		BD0F5D1E228675D600440F18 /* GetJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJson.swift; sourceTree = "<group>"; };
+		BD50EB8422D86C4E006337AB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		BD659CF7228AA393006FEB8F /* LottieFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieFile.swift; sourceTree = "<group>"; };
 		BD9AF822228D220E005EC346 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		BD9AF825228E33C8005EC346 /* demo1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo1.json; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				BDB7890C2286729500A48793 /* AppDelegate.swift */,
 				BDB7890E2286729500A48793 /* PlayViewController.swift */,
+				BD50EB8422D86C4E006337AB /* ARViewController.swift */,
 				BD0F5D112286742100440F18 /* GetLottieViewContoroller.swift */,
 				BD0F5D132286742E00440F18 /* FileListViewController.swift */,
 				BD9AF822228D220E005EC346 /* InfoView.swift */,
@@ -252,6 +255,7 @@
 				BD0F5D1A2286752B00440F18 /* Either.swift in Sources */,
 				BD9AF823228D220E005EC346 /* InfoView.swift in Sources */,
 				BDB7890F2286729500A48793 /* PlayViewController.swift in Sources */,
+				BD50EB8522D86C4E006337AB /* ARViewController.swift in Sources */,
 				BD659CF8228AA393006FEB8F /* LottieFile.swift in Sources */,
 				BDB7890D2286729500A48793 /* AppDelegate.swift in Sources */,
 				BD0F5D16228674A300440F18 /* extentions.swift in Sources */,

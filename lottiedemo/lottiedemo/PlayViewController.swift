@@ -102,9 +102,9 @@ class PlayViewController: UIViewController {
         //スタートボタン
         startButton = UIButton.init(frame: CGRect(x: 0,
                                                   y: 0,
-                                                  width: UIScreen.main.bounds.size.width*6/10,
+                                                  width: UIScreen.main.bounds.size.width*4/10,
                                                   height: 35))
-        startButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
+        startButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/4,
                                              y: animationView.frame.height + 100 + 75 + 40)
         
         startButton.isUserInteractionEnabled = true
@@ -122,6 +122,24 @@ class PlayViewController: UIViewController {
         startButton.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
         startButton.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .normal)
         self.view.addSubview(startButton)
+        
+        //ARボタン
+        let arButton = UIButton.init(frame: CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width*4/10,height: 35))
+        arButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*3/4,
+                                             y: animationView.frame.height + 100 + 75 + 40)
+        arButton.isUserInteractionEnabled = true
+        arButton.addTarget(self,action: #selector(onTapArButton(sender:)),for: .touchUpInside)
+        arButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)//アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
+        arButton.isExclusiveTouch = true//複数選択制御
+        arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .normal)
+        arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .highlighted)
+        arButton.layer.masksToBounds = true
+        arButton.layer.cornerRadius = 5.0
+        arButton.showsTouchWhenHighlighted = true
+        arButton.setTitle(NSLocalizedString("ARView", comment: ""), for: .normal)
+        arButton.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
+        arButton.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .normal)
+        self.view.addSubview(arButton)
         
         //プロパティ表示
         propertyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 60))
@@ -156,6 +174,9 @@ class PlayViewController: UIViewController {
                 title = ""
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
     }
     
     /*-------------------------------------------------------------------------
@@ -198,8 +219,10 @@ class PlayViewController: UIViewController {
         print(path.path)
         
         //アニメ設定
-        animationView.animation = Animation.filepath(path.path)
-        animationView.play()
+        if let anime = Animation.filepath(path.path){
+            animationView.animation = anime
+            animationView.play()
+        }
         
         //アニメーションプロパティ設定
         var text = ""
@@ -245,11 +268,19 @@ class PlayViewController: UIViewController {
         }
     }
     
+    //ボタン
+    @objc internal func onTapArButton(sender: UIButton){
+        print("onTapArButton")
+        let next = ARViewController()
+        //self.navigationController?.pushViewController(next, animated: true)
+        next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        let nav: UINavigationController = UINavigationController(rootViewController: next)
+        self.present(nav, animated: true, completion: nil)
+    }
+    
     /*-------------------------------------------------------------------------
      Other
      -------------------------------------------------------------------------*/
-    
-    
     
     private func createImageFromUIColor(color: UIColor) -> UIImage{
         // 1x1のbitmapを作成
