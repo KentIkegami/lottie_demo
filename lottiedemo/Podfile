@@ -6,6 +6,7 @@ target 'lottiedemo' do
   use_frameworks!
 pod 'lottie-ios'
 pod 'NVActivityIndicatorView'
+pod 'Malert'
 
   # Pods for lottiedemo
 

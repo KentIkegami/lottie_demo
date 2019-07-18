@@ -98,47 +98,47 @@ class PlayViewController: UIViewController {
         
         slider2.addTarget(self, action: #selector(sliderDidChangeValue2(_:)), for: .valueChanged)
         view.addSubview(slider2)
-
-        //スタートボタン
-        startButton = UIButton.init(frame: CGRect(x: 0,
-                                                  y: 0,
-                                                  width: UIScreen.main.bounds.size.width*4/10,
-                                                  height: 35))
-        startButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/4,
-                                             y: animationView.frame.height + 100 + 75 + 40)
         
-        startButton.isUserInteractionEnabled = true
-        startButton.addTarget(self,
-                              action: #selector(onTapStartButton(sender:)),
-                              for: .touchUpInside)
-        startButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)//アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
-        startButton.isExclusiveTouch = true//複数選択制御
+        func baseButton()->UIButton{
+            let baseButton = UIButton.init()
+            baseButton.frame = CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width*5/20,height: 35)
+            baseButton.isUserInteractionEnabled = true
+            baseButton.addTarget(self, action: #selector(onTapStartButton(sender:)),for: .touchUpInside)
+            baseButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)
+            baseButton.isExclusiveTouch = true
+            baseButton.layer.masksToBounds = true
+            baseButton.layer.cornerRadius = 5.0
+            baseButton.showsTouchWhenHighlighted = true
+            baseButton.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
+            baseButton.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .normal)
+            return baseButton
+        }
+        
+        //Demoボタン
+        let demoButton = baseButton()
+        demoButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/5, y: animationView.frame.height + 100 + 75 + 40)
+        demoButton.addTarget(self,action: #selector(onTapDemoButton(sender:)),for: .touchUpInside)
+        demoButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_DEMO, alpha: 1.0)), for: .normal)
+        demoButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_DEMO, alpha: 1.0)), for: .highlighted)
+        demoButton.setTitle(NSLocalizedString("Demo", comment: ""), for: .normal)
+        self.view.addSubview(demoButton)
+        
+        //スタートボタン
+        startButton = baseButton()
+        startButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*2/4, y: animationView.frame.height + 100 + 75 + 40)
+        startButton.addTarget(self,action: #selector(onTapStartButton(sender:)),for: .touchUpInside)
         startButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 1.0)), for: .normal)
         startButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 1.0)), for: .highlighted)
-        startButton.layer.masksToBounds = true
-        startButton.layer.cornerRadius = 5.0
-        startButton.showsTouchWhenHighlighted = true
-        startButton.setTitle(NSLocalizedString("Pouse", comment: ""), for: .normal)
-        startButton.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
-        startButton.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .normal)
+        startButton.setTitle(NSLocalizedString("Pause", comment: ""), for: .normal)
         self.view.addSubview(startButton)
         
         //ARボタン
-        let arButton = UIButton.init(frame: CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width*4/10,height: 35))
-        arButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*3/4,
-                                             y: animationView.frame.height + 100 + 75 + 40)
-        arButton.isUserInteractionEnabled = true
+        let arButton = baseButton()
+        arButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*4/5, y: animationView.frame.height + 100 + 75 + 40)
         arButton.addTarget(self,action: #selector(onTapArButton(sender:)),for: .touchUpInside)
-        arButton.layer.anchorPoint = CGPoint(x:0.5, y:0.5)//アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
-        arButton.isExclusiveTouch = true//複数選択制御
         arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .normal)
         arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .highlighted)
-        arButton.layer.masksToBounds = true
-        arButton.layer.cornerRadius = 5.0
-        arButton.showsTouchWhenHighlighted = true
         arButton.setTitle(NSLocalizedString("ARView", comment: ""), for: .normal)
-        arButton.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
-        arButton.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .normal)
         self.view.addSubview(arButton)
         
         //プロパティ表示
@@ -253,11 +253,21 @@ class PlayViewController: UIViewController {
         }else if sender.tag == 2{
             let infoView = InfoView(frame: self.view.frame)
             navigationController?.view.addSubview(infoView)
-            
         }
     }
     
-    //ボタン
+    //demoボタンTap
+    @objc internal func onTapDemoButton(sender: UIButton){
+        UIView.animate(withDuration: 0.6,
+                       delay: 0.0,
+                       options: UIView.AnimationOptions.curveEaseOut,
+                       animations: {self.view.alpha = 0.0},
+                       completion: { _ in
+                        let del = UIApplication.shared.delegate as! AppDelegate
+                        del.popDemo()})
+    }
+    
+    //playボタンTap
     @objc internal func onTapStartButton(sender: UIButton){
         if startButton.titleLabel?.text == "Pause" {
             animationView.pause()
@@ -268,11 +278,10 @@ class PlayViewController: UIViewController {
         }
     }
     
-    //ボタン
+    //arボタンTap
     @objc internal func onTapArButton(sender: UIButton){
         print("onTapArButton")
         let next = ARViewController()
-        //self.navigationController?.pushViewController(next, animated: true)
         next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         let nav: UINavigationController = UINavigationController(rootViewController: next)
         self.present(nav, animated: true, completion: nil)

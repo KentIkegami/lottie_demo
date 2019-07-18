@@ -18,6 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func popDemo(){
+        let initViewController = DemoViewController()
+        let nav: UINavigationController = UINavigationController(rootViewController: initViewController)
+        self.window?.rootViewController = nav
+        self.window?.makeKeyAndVisible()
+    }
+
     func popMain(){
         initViewController = PlayViewController()
         let nav: UINavigationController = UINavigationController(rootViewController: initViewController)
@@ -46,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //初回起動処理
     func firstLaunch(){
         
-        let demos = ["demo1"]
+        let demos = ["ebifurai"]
         for demo in demos{
             let url = URL(fileURLWithPath: Bundle.main.path( forResource: demo, ofType: "json" )! )
             let toDir = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first
@@ -57,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        UserDefaults.standard.set("demo1.json", forKey: "filename")
+        UserDefaults.standard.set("ebifurai.json", forKey: "filename")
         UserDefaults.standard.set(1, forKey: "firstLaunch")
     }
    

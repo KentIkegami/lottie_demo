@@ -15,9 +15,12 @@
 		BD0F5D1D2286758400440F18 /* WebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0F5D1C2286758400440F18 /* WebAPI.swift */; };
 		BD0F5D1F228675D600440F18 /* GetJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0F5D1E228675D600440F18 /* GetJson.swift */; };
 		BD50EB8522D86C4E006337AB /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD50EB8422D86C4E006337AB /* ARViewController.swift */; };
+		BD50EB8922DD8192006337AB /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD50EB8822DD8192006337AB /* DemoViewController.swift */; };
 		BD659CF8228AA393006FEB8F /* LottieFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD659CF7228AA393006FEB8F /* LottieFile.swift */; };
+		BD68996822DEC05C00A90035 /* CustomAnimationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD68996722DEC05C00A90035 /* CustomAnimationButton.swift */; };
+		BD68996C22DEEECA00A90035 /* ebifurai.json in Resources */ = {isa = PBXBuildFile; fileRef = BD68996B22DEEECA00A90035 /* ebifurai.json */; };
+		BD68996E22DEF1BD00A90035 /* CustomAlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD68996D22DEF1BD00A90035 /* CustomAlertButton.swift */; };
 		BD9AF823228D220E005EC346 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9AF822228D220E005EC346 /* InfoView.swift */; };
-		BD9AF826228E33C8005EC346 /* demo1.json in Resources */ = {isa = PBXBuildFile; fileRef = BD9AF825228E33C8005EC346 /* demo1.json */; };
 		BDB7890D2286729500A48793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB7890C2286729500A48793 /* AppDelegate.swift */; };
 		BDB7890F2286729500A48793 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB7890E2286729500A48793 /* PlayViewController.swift */; };
 		BDB789142286729600A48793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDB789132286729600A48793 /* Assets.xcassets */; };
@@ -35,9 +38,12 @@
 		BD0F5D1C2286758400440F18 /* WebAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAPI.swift; sourceTree = "<group>"; };
 		BD0F5D1E228675D600440F18 /* GetJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJson.swift; sourceTree = "<group>"; };
 		BD50EB8422D86C4E006337AB /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		BD50EB8822DD8192006337AB /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		BD659CF7228AA393006FEB8F /* LottieFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieFile.swift; sourceTree = "<group>"; };
+		BD68996722DEC05C00A90035 /* CustomAnimationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationButton.swift; sourceTree = "<group>"; };
+		BD68996B22DEEECA00A90035 /* ebifurai.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ebifurai.json; sourceTree = "<group>"; };
+		BD68996D22DEF1BD00A90035 /* CustomAlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertButton.swift; sourceTree = "<group>"; };
 		BD9AF822228D220E005EC346 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		BD9AF825228E33C8005EC346 /* demo1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo1.json; sourceTree = "<group>"; };
 		BDB789092286729500A48793 /* lottiedemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lottiedemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDB7890C2286729500A48793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDB7890E2286729500A48793 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
@@ -85,10 +91,19 @@
 			path = Const;
 			sourceTree = "<group>";
 		};
+		BD68996922DEC76C00A90035 /* demoView */ = {
+			isa = PBXGroup;
+			children = (
+				BD68996722DEC05C00A90035 /* CustomAnimationButton.swift */,
+				BD68996D22DEF1BD00A90035 /* CustomAlertButton.swift */,
+			);
+			path = demoView;
+			sourceTree = "<group>";
+		};
 		BD9AF817228D03CF005EC346 /* demo */ = {
 			isa = PBXGroup;
 			children = (
-				BD9AF825228E33C8005EC346 /* demo1.json */,
+				BD68996B22DEEECA00A90035 /* ebifurai.json */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -117,6 +132,8 @@
 				BDB7890C2286729500A48793 /* AppDelegate.swift */,
 				BDB7890E2286729500A48793 /* PlayViewController.swift */,
 				BD50EB8422D86C4E006337AB /* ARViewController.swift */,
+				BD50EB8822DD8192006337AB /* DemoViewController.swift */,
+				BD68996922DEC76C00A90035 /* demoView */,
 				BD0F5D112286742100440F18 /* GetLottieViewContoroller.swift */,
 				BD0F5D132286742E00440F18 /* FileListViewController.swift */,
 				BD9AF822228D220E005EC346 /* InfoView.swift */,
@@ -191,7 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD9AF826228E33C8005EC346 /* demo1.json in Resources */,
+				BD68996C22DEEECA00A90035 /* ebifurai.json in Resources */,
 				BDB789142286729600A48793 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +225,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-lottiedemo/Pods-lottiedemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Malert/Malert.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
@@ -215,6 +233,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Malert.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
@@ -254,16 +273,19 @@
 			files = (
 				BD0F5D1A2286752B00440F18 /* Either.swift in Sources */,
 				BD9AF823228D220E005EC346 /* InfoView.swift in Sources */,
+				BD68996822DEC05C00A90035 /* CustomAnimationButton.swift in Sources */,
 				BDB7890F2286729500A48793 /* PlayViewController.swift in Sources */,
 				BD50EB8522D86C4E006337AB /* ARViewController.swift in Sources */,
 				BD659CF8228AA393006FEB8F /* LottieFile.swift in Sources */,
 				BDB7890D2286729500A48793 /* AppDelegate.swift in Sources */,
+				BD50EB8922DD8192006337AB /* DemoViewController.swift in Sources */,
 				BD0F5D16228674A300440F18 /* extentions.swift in Sources */,
 				BD0F5D142286742E00440F18 /* FileListViewController.swift in Sources */,
 				BD0F5D122286742100440F18 /* GetLottieViewContoroller.swift in Sources */,
 				BD0F5D1F228675D600440F18 /* GetJson.swift in Sources */,
 				BD0F5D18228674C900440F18 /* Const.swift in Sources */,
 				BD0F5D1D2286758400440F18 /* WebAPI.swift in Sources */,
+				BD68996E22DEF1BD00A90035 /* CustomAlertButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +420,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lottie.master;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lottie.viewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -417,7 +439,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lottie.master;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lottie.viewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
