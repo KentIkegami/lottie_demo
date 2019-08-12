@@ -14,3 +14,7 @@ Lottie demo
 2. lottieアニメファイルの取得[URL,AirDrop,iTunse等]
 3. lottieアニメファイルの永続保持
 4. lottieアニメファイルの共有[AirDrop等]
+
+## app store
+
+https://apps.apple.com/jp/app/lottie-viewer/id1473254582
