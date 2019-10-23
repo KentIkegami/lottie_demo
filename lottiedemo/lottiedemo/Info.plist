@@ -19,7 +19,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.lottie.demo</string>
+				<string>public.json</string>
 			</array>
 		</dict>
 	</array>
@@ -80,13 +80,13 @@
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.lottie.demo</string>
+			<string>public.json</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
 					<string>json</string>
-					<string>custom</string>
+					<string>JSON</string>
 				</array>
 			</dict>
 		</dict>
