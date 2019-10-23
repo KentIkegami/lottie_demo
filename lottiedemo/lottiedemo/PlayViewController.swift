@@ -139,7 +139,7 @@ class PlayViewController: UIViewController {
         arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .normal)
         arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .highlighted)
         arButton.setTitle(NSLocalizedString("ARView", comment: ""), for: .normal)
-        self.view.addSubview(arButton)
+        //self.view.addSubview(arButton)
         
         //プロパティ表示
         propertyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 60))
@@ -159,7 +159,13 @@ class PlayViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        reloadView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+    }
+    
+    func reloadView(){
         if UserDefaults.standard.object(forKey: "filename") != nil {
             let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let path = documentDirectoryURL.appendingPathComponent( UserDefaults.standard.object(forKey: "filename") as! String)
@@ -174,9 +180,6 @@ class PlayViewController: UIViewController {
                 title = ""
             }
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
     }
     
     /*-------------------------------------------------------------------------
@@ -242,13 +245,16 @@ class PlayViewController: UIViewController {
     @objc internal func onTap(sender: UIButton){
         if sender.tag == 0 {
             let next = GetLottieViewContoroller()
+            next.playViewController = self
             next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
             let nav: UINavigationController = UINavigationController(rootViewController: next)
             self.present(nav, animated: true, completion: nil)
         }else if sender.tag == 1{
             let next = FileListViewController()
+            next.playViewController = self
             next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
             let nav: UINavigationController = UINavigationController(rootViewController: next)
+            nav.modalPresentationStyle = .pageSheet
             self.present(nav, animated: true, completion: nil)
         }else if sender.tag == 2{
             let infoView = InfoView(frame: self.view.frame)

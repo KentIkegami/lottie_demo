@@ -5,6 +5,8 @@ import NVActivityIndicatorView
 
 class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityIndicatorViewable {
     
+    var playViewController: PlayViewController!
+    
     private var lottieURLForm:UITextField!
     private var getButton:UIButton!
     private var linkButton:UIButton!
@@ -36,7 +38,7 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
         lottieURLForm.layer.masksToBounds = true
         lottieURLForm.layer.cornerRadius = 3.0
         //背景関係
-        lottieURLForm.backgroundColor = UIColor.hex(COLOR.BASE, alpha: 1)
+        lottieURLForm.backgroundColor = UIColor(named: "BASE")
         lottieURLForm.layer.borderWidth = 3
         lottieURLForm.layer.borderColor = UIColor.hex(COLOR.ACCENT, alpha: 1).cgColor
         
@@ -161,7 +163,9 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
     
     //戻る
     @objc internal func onTapCancel(sender: UIButton){
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: { 
+            self.playViewController.viewWillAppear(true)
+        })
     }
     
     @objc func onTap (sender:UIButton){
@@ -209,7 +213,9 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityI
                 print("filePath: \(filePath)") 
                 try text.write(to: filePath, atomically: true, encoding: .utf8)
                 UserDefaults.standard.set(fileName(_str: url)+".json", forKey: "filename")
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    self.playViewController.viewWillAppear(true)
+                })
                 
             } catch {
                 print("error")

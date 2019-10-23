@@ -4,6 +4,8 @@ import UIKit
 
 class FileListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var playViewController: PlayViewController!
+    
     private var _tableView: UITableView!
     private var lottieFiles:[LottieFile]!
     
@@ -44,7 +46,9 @@ class FileListViewController: UIViewController, UITableViewDelegate, UITableView
     
     //戻る
     @objc internal func onTapCancel(sender: UIButton){
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.playViewController.reloadView()
+        })
     }
     
     //ドキュメントファイル取得
@@ -93,7 +97,7 @@ class FileListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         UserDefaults.standard.set(lottieFiles[indexPath.row].filename, forKey: "filename")
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {self.playViewController.reloadView()})
         
         //cellの選択解除
         if let indexPathForSelectedRow = _tableView.indexPathForSelectedRow {
