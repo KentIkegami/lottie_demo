@@ -284,6 +284,7 @@ class PlayViewController: UIViewController {
         let next = ARViewController()
         next.modalTransitionStyle = UIModalTransitionStyle.coverVertical
         let nav: UINavigationController = UINavigationController(rootViewController: next)
+        nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
     }
     

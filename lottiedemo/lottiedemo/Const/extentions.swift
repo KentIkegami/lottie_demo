@@ -41,7 +41,6 @@ extension UIApplication {
             let icon = UIImage(named: lastIcon) else {
                 return nil
         }
-        
         return icon
     }
 }
