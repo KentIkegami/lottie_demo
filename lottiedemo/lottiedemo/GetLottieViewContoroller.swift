@@ -3,7 +3,7 @@
 import UIKit
 import NVActivityIndicatorView
 
-class GetLottieViewContoroller: UIViewController,UITextFieldDelegate,NVActivityIndicatorViewable {
+class GetLottieViewContoroller: UIViewController,UITextFieldDelegate {
     
     var playViewController: PlayViewController!
     

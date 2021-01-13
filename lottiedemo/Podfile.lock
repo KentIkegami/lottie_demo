@@ -1,9 +1,9 @@
 PODS:
-  - lottie-ios (3.1.6)
+  - lottie-ios (3.1.9)
   - Malert (4.0)
-  - NVActivityIndicatorView (4.8.0):
-    - NVActivityIndicatorView/Presenter (= 4.8.0)
-  - NVActivityIndicatorView/Presenter (4.8.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
 
 DEPENDENCIES:
   - lottie-ios
@@ -17,10 +17,10 @@ SPEC REPOS:
     - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
-  lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   Malert: 78badcb143f4df7bff1fa62f4bec05497c7865f3
-  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
 
 PODFILE CHECKSUM: cb57148d79c76746c0c6d2180033092dc49cbc53
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0
