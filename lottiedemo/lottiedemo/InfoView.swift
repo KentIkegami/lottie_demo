@@ -82,7 +82,7 @@ class InfoView: UIView {
                                                  height: 30))
         subTitleLabel1.layer.position = CGPoint(x: self.bounds.size.width*1/2,
                                                y:  self.bounds.size.height*5.6/11)
-        subTitleLabel1.text = "Version: 3.0.6"
+        subTitleLabel1.text = "Version: 3.1.9"
         subTitleLabel1.font = UIFont.systemFont(ofSize: 15)
         subTitleLabel1.textColor = UIColor.hex(COLOR.FONT, alpha: 1.0)
         subTitleLabel1.textAlignment = NSTextAlignment.center

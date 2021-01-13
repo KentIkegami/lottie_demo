@@ -51,7 +51,7 @@ class PlayViewController: UIViewController {
         
         //スピード表示
         speedLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 30))
-        speedLabel.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 100)
+        speedLabel.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 120)
         speedLabel.text = "x1.0"
         speedLabel.font = UIFont(name: "Helvetica", size: 20)
         speedLabel.textColor = UIColor.hex(COLOR.ACCENT, alpha: 1)
@@ -63,7 +63,7 @@ class PlayViewController: UIViewController {
                                                   y: 0,
                                                   width: UIScreen.main.bounds.size.width*0.95,
                                                   height: 35))
-        backChangeButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 100)
+        backChangeButton.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,y: 120)
         backChangeButton.isUserInteractionEnabled = true
         backChangeButton.addTarget(self,
                               action: #selector(onTapbackChangeButton(sender:)),
@@ -139,7 +139,7 @@ class PlayViewController: UIViewController {
         arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .normal)
         arButton.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT_AR, alpha: 1.0)), for: .highlighted)
         arButton.setTitle(NSLocalizedString("ARView", comment: ""), for: .normal)
-        //self.view.addSubview(arButton)
+        self.view.addSubview(arButton)
         
         //プロパティ表示
         propertyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width*0.95, height: 60))

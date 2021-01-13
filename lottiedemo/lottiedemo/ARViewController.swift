@@ -8,6 +8,7 @@ class ARViewController: UIViewController {
     
     private var arScnView: ARSCNView!
     private var animationView:AnimationView!
+    private var isTapped = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +46,10 @@ class ARViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         print("viewWillDisappear")
-        arScnView.session.pause()
     }
     
     @objc func tapped(_ sender: UITapGestureRecognizer) {
+        self.isTapped = true
         //https://qiita.com/chino_tweet/items/a8a3f68cdadaf2e307ba
         guard let currentFrame = arScnView.session.currentFrame else { return  }
         
@@ -90,12 +91,27 @@ class ARViewController: UIViewController {
     }
     //戻る
     @objc internal func onTapCancel(sender: UIButton){
-        UIView.animate(withDuration: 0.6,
-                       delay: 0.0,
-                       options: UIView.AnimationOptions.curveEaseOut,
-                       animations: {self.view.alpha = 0.0},
-                       completion: { _ in
-                        let del = UIApplication.shared.delegate as! AppDelegate
-                        del.popMain()})
+        if isTapped{
+            let alert: UIAlertController = UIAlertController(title: "ARmode stop", message: "Please restart this application.", preferredStyle:  UIAlertController.Style.alert)
+            let cancelAction: UIAlertAction = UIAlertAction(title: "close", style: UIAlertAction.Style.cancel, handler:{
+                (action: UIAlertAction!) -> Void in
+            })
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
+        }else{
+            self.dismiss(animated: true, completion: nil)
+//            UIView.animate(withDuration: 0.6,
+//                           delay: 0.0,
+//                           options: UIView.AnimationOptions.curveEaseOut,
+//                           animations: {self.view.alpha = 0.0},
+//                           completion: { _ in
+//                            self.arScnView.session.pause()
+//                            self.arScnView.removeFromSuperview()
+//                            self.arScnView = nil
+//                            //self.dismiss(animated: true, completion: nil)
+//                            let del = UIApplication.shared.delegate as! AppDelegate
+//                            del.popMain()
+//                           })
+        }
     }
 }

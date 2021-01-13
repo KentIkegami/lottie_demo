@@ -3,12 +3,13 @@
 import UIKit
 import NVActivityIndicatorView
 
-class GetLottieViewContoroller: UIViewController,UITextFieldDelegate {
+class GetLottieViewContoroller: UIViewController,UITextFieldDelegate, UIDocumentPickerDelegate {
     
     var playViewController: PlayViewController!
     
     private var lottieURLForm:UITextField!
     private var getButton:UIButton!
+    private var getButton2:UIButton!
     private var linkButton:UIButton!
     private var textLabel:UILabel!
     private var activeIndicatorView:NVActivityIndicatorView!
@@ -93,6 +94,39 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate {
         self.view.addSubview(getButton)
         
         /*-------------------------------------------------------------------------
+         GETボタン
+         -------------------------------------------------------------------------*/
+        //サイズ
+        getButton2 = UIButton.init(frame: CGRect(x: 0,
+                                                  y: 0,
+                                                  width: UIScreen.main.bounds.size.width*9/10,
+                                                  height: 30))
+        getButton2.layer.position = CGPoint(x: UIScreen.main.bounds.size.width*1/2,
+                                            y: UIScreen.main.bounds.size.height*2.5/10)
+        
+        getButton2.isUserInteractionEnabled = true
+        getButton2.addTarget(self,
+                              action: #selector(onTap2(sender:)),
+                              for: .touchUpInside)
+        //アンカーポイントの変更 CGPoint(x:0.5, y:0.5)
+        getButton2.layer.anchorPoint = CGPoint(x:0.5, y:0.5)
+        //複数選択制御
+        getButton2.isExclusiveTouch = true
+        //背景
+        getButton2.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 1.0)), for: .normal)
+        getButton2.setBackgroundImage(self.createImageFromUIColor(color: UIColor.hex(COLOR.ACCENT, alpha: 1.0)), for: .highlighted)
+        getButton2.layer.masksToBounds = true
+        getButton2.layer.cornerRadius = 3.0
+        getButton2.showsTouchWhenHighlighted = true
+        //タイトル関係
+        getButton2.setTitle(NSLocalizedString("Files", comment: ""), for: .normal)
+        getButton2.titleLabel?.font = UIFont(name: "Helvetica", size: 22)
+        getButton2.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .normal)
+        getButton2.setTitle(NSLocalizedString("Files", comment: ""), for: .highlighted)
+        getButton2.setTitleColor(UIColor.hex(COLOR.BASE, alpha: 1.0), for: .highlighted)
+        self.view.addSubview(getButton2)
+        
+        /*-------------------------------------------------------------------------
          テキスト
          -------------------------------------------------------------------------*/
         textLabel = UILabel(frame:CGRect(x: 0,
@@ -100,11 +134,12 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate {
                                           width: CGFloat(UIScreen.main.bounds.size.width)*8/10,
                                           height: 300))
         textLabel.layer.position = CGPoint(x: CGFloat(UIScreen.main.bounds.size.width)/2,
-                                            y:  CGFloat(UIScreen.main.bounds.size.height)*4/10)
+                                           y:  CGFloat(UIScreen.main.bounds.size.height)*4.5/10)
         textLabel.text =
         """
         You can get animation json file in various ways.
         
+        - Files
         - AirDrop
         - iTunse File Sharing
         - E-mail Attached File
@@ -171,6 +206,35 @@ class GetLottieViewContoroller: UIViewController,UITextFieldDelegate {
     @objc func onTap (sender:UIButton){
         UserDefaults.standard.set(lottieURLForm.text, forKey: "url")
         self.getLottie()
+    }
+    
+    @objc func onTap2 (sender:UIButton){
+        let vc = UIDocumentPickerViewController(documentTypes: ["public.json"], in: .import)
+        vc.allowsMultipleSelection = false
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        print(urls.first!)
+        let url = urls.first!
+        let toDir = FileManager.default.urls( for: .documentDirectory, in: .userDomainMask ).first
+        do {
+            try? FileManager.default.removeItem(at: toDir!.appendingPathComponent( url.lastPathComponent))
+            try FileManager.default.moveItem(at: url, to: toDir!.appendingPathComponent( url.lastPathComponent))
+            let alert: UIAlertController = UIAlertController(title: "Saved!", message: "", preferredStyle:  UIAlertController.Style.alert)
+            let cancelAction: UIAlertAction = UIAlertAction(title: "close", style: UIAlertAction.Style.cancel, handler:{
+                (action: UIAlertAction!) -> Void in
+            })
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
+        } catch {
+            print("copy error")
+        }
+    }
+
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        
     }
     
     @objc func onTapLink (sender:UIButton){
